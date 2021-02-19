@@ -1,11 +1,11 @@
 let dataModel = {
-  score: 244,
-  bestScore: 244,
+  score: 0,
+  bestScore: 0,
   board: [
-    [2,    8,    16,   32],
-    [null, 4,    8,    16],
-    [null, null, null, 2],
-    [null, 2,    null, 4]
+    [null, null, null, null],
+    [null, null, null, null],
+    [null, null, null, null],
+    [null, null, null, null]
   ]
 } 
 
@@ -16,12 +16,47 @@ function moveRight() {}
 function moveUp(){}
 function moveDown() {}
 
+document.addEventListener("keypress", function(event) {
+  let key = event.keyCode;
+  if (key == "38") {
+    moveUp();
+  } else if (key == "40") {
+    moveDown();
+  } else if (key == "37") {
+    moveLeft();
+  } else if (key == "39") {
+    moveRight();
+  }
+})
+
 // This function gets called after each move, it should add a random tile into an empty space
-function addRandomTile() {}
+function addRandomTile() {
+  let emptyCoordinates = [];
+
+  for (let row = 0; row < dataModel.board.length; row++) {
+    for (let column = 0; column < dataModel.board[row].length; column++) {
+      let value = dataModel.board[row][column];
+      if (value == null) {
+        emptyCoordinates.push([row, column]);
+      }
+    }
+  }
+  let randomIndex = Math.floor(Math.random() * emptyCoordinates.length);
+  let coordinates = emptyCoordinates[randomIndex];
+  dataModel.board[coordinates[0]][coordinates[1]] = 2;
+}
 
 // This function will check if there are no empty squares left.
 function checkIfGameHasEnded() {
-  return false; // It will return a boolean, true or false if the game has ended.
+  for (let row = 0; row < dataModel.board.length; row++) {
+    for (let column = 0; column < dataModel.board[row].length; column++) {
+      let value = dataModel.board[row][column];
+      if (value == null) {
+        return false;
+      }
+    }
+  }
+  return true;
 }
 
 // This will reset the board to the starting conditions

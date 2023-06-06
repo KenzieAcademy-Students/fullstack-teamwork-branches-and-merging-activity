@@ -59,3 +59,11 @@ function startGame() {
   renderBoard();
 }
 startGame();
+
+
+
+
+
+
+
+// Shouldn't be any issues unless we try to merge this line!

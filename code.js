@@ -66,6 +66,7 @@ function addRandomTile() {
   dataModel.board[coordinates[0]][coordinates[1]] = 2;
 }
 
+// Hope this line doesn't induce a merge conflict
 // This function will check if there are no empty squares left.
 function checkIfGameHasEnded() {
   return false; // It will return a boolean, true or false if the game has ended.
